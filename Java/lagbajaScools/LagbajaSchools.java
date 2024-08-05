@@ -39,8 +39,22 @@ public class LagbajaSchools{
 
 		//print the result in tabular form
 
-		for(int counter = 0; counter < subjectTheyOffer.length; counter++){
-			System.out.printf("student%5d sub%5d + ", counter);
+		System.out.println("=============================================");
+
+		System.out.print("STUDENTS \t");
+		for(int counter = 0; counter < subjectTheyOffer; counter++){
+			System.out.printf("SUB%d \t", (counter+1));
+		}
+		System.out.print("TOT \t AVE\n");
+		System.out.println("=============================================");
+		
+		for(int index = 0; index < numberOfStudent; index++){
+			System.out.print("Student \t", (index+1));
+			
+			for(int scores : gradeCollection[numberOfStudent]){
+				System.out.println(gradeCollection)
+			}
+			System.out.println();
 		}
 
 
