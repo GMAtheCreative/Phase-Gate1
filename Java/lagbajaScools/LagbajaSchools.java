@@ -37,6 +37,13 @@ public class LagbajaSchools{
 		// Average of scores
 		double [] averageOfScores = ArrayFunctions.averageOfNumbersInAList(sumOfScores);
 
+		//print the result in tabular form
+
+		for(int counter = 0; counter < subjectTheyOffer.length; counter++){
+			System.out.printf("student%5d sub%5d + ", counter);
+		}
+
+
 		
 	}
 }
