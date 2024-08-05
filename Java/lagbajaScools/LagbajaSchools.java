@@ -24,6 +24,9 @@ public class LagbajaSchools{
 
 				gradeCollection[studentCounter][scoreCounter] = collect.nextInt();
 			}
+			System.out.println("Saving>>>>>>>>>>>>>>>>>>>>>>>>>...");
+			System.out.println("Successfully saved");
+			System.out.println("===================================\n");
 			System.out.println();
 		}
 		
@@ -32,7 +35,7 @@ public class LagbajaSchools{
 		int [] sumOfScores = ArrayFunctions.addNumbersInList(gradeCollection);
 
 		// Average of scores
-		int [] averageOfScores = ArrayFunctions.averageOfNumbersInAList(sumOfScores);
+		double [] averageOfScores = ArrayFunctions.averageOfNumbersInAList(sumOfScores);
 
 		
 	}

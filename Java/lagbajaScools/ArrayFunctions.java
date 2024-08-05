@@ -18,14 +18,10 @@ public class ArrayFunctions{
 	public static double[] averageOfNumbersInAList(int [] numbers){
 		
 		
-		int [] averageOfList = new int[numbers.length];
+		double [] averageOfList = new double[numbers.length];
 
 		for(int index = 0; index < numbers.length; index++){
-			int amountOfNumbers = 0;
-			for(int value : numbers){
-				amountOfNumbers = value + 1;
-			}
-			averageOfList = numbers[index / amountOfNumbers];
+			averageOfList[index] = (double) numbers[index] / numbers.length;
 		}
 		return averageOfList;
 	}
