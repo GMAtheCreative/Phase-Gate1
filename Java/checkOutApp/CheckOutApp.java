@@ -56,7 +56,7 @@ public class CheckOutApp{
 		String cashierName = collect.next();
 		
 		System.out.println("How much discount will " + customerName + " get?");
-		int discountToGive = collect.nextInt();
+		double discountToGive = collect.nextDouble();
 
 		
 		for(int index = 0; index < quantityOfItems.size(); index++){
