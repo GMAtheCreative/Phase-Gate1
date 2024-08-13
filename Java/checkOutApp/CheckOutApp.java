@@ -34,11 +34,21 @@ public class CheckOutApp{
 
 			System.out.println("How many pieces?");
 			int itemCount = collect.nextInt();
+			while (itemCount < 1){
+				System.out.println("How many pieces?");
+				itemCount = collect.nextInt();
+				
+			}
 
 			System.out.println("How much per unit?");
 			double amountPerItem = collect.nextInt();
+			while (amountPerItem < 1.0){
+				System.out.println("How much per unit?");
+				amountPerItem = collect.nextDouble();
+				
+			}
 
-			System.out.println("Add more items?");
+			System.out.println("Add more items?(YES/NO)");
 			String continuationCondition = collect.next();
 
 			namesOfItems.add(items);
@@ -57,6 +67,12 @@ public class CheckOutApp{
 		
 		System.out.println("How much discount will " + customerName + " get?");
 		double discountToGive = collect.nextDouble();
+			while (discountToGive < 1 || discountToGive > 10){
+				System.out.println("How much discount will " + customerName + " get?");
+				discountToGive = collect.nextDouble();
+				
+			}
+
 
 		
 		for(int index = 0; index < quantityOfItems.size(); index++){
@@ -89,66 +105,102 @@ public class CheckOutApp{
 		System.out.println("-------------------------------------------------------------------");
 		System.out.printf("                          Sub Total:  %10s%n", subTotal);
 		System.out.printf("                           Discount:  %10s%n", discount); 
-		System.out.printf("                        Vat @ 17.50:  %10s%n", vat);
+		System.out.printf("                        Vat @ 17.50:  %10.2f%n", vat);
 		System.out.println("===================================================================");
 		System.out.printf("                         Bill Total:  %10s%n", billTotal);
 		System.out.println("===================================================================");
 		System.out.println("THIS IS NOT A RECEIPT KINDLY PAY " + billTotal);
+	
+		while(true){
+			System.out.println("How much did " + customerName + " give to you?");
+			double amountPaid = collect.nextDouble();
 
-		System.out.println("How much did " + customerName + " give to you?");
-		double amountPaid = collect.nextDouble();
+			if(amountPaid > billTotal){
+				leftOver = amountPaid - billTotal;
 
-		if(amountPaid > billTotal){
-			leftOver = amountPaid - billTotal;
+				System.out.println("SEMICOLON STORES \nMAIN BRANCH \nLOCATION: 312, HERBERT MACAULAY WAY, SABO YABA, LAGOS. \nTEL: " + phoneNumber +"\nDate: " + formattedDateAndTime +"\nCashier: " + cashierName +"\nCustomer's name: " + customerName);
 
-			System.out.println("SEMICOLON STORES \nMAIN BRANCH \nLOCATION: 312, HERBERT MACAULAY WAY, SABO YABA, LAGOS. \nTEL: " + phoneNumber +"\nDate: " + formattedDateAndTime +"\nCashier: " + cashierName +"\nCustomer's name: " + customerName);
+				System.out.println("===================================================================");
+				System.out.println("          ITEM          QTY   PRICE   TOTAL(NGN)");
+				System.out.println("-------------------------------------------------------------------");
 
-			System.out.println("===================================================================");
-			System.out.println("          ITEM          QTY   PRICE   TOTAL(NGN)");
-			System.out.println("-------------------------------------------------------------------");
-
-			for(int index = 0; index < namesOfItems.size(); index++){
-				System.out.printf("%15s%10s%10s%10s", namesOfItems.get(index), quantityOfItems.get(index), pricesOfEachItem.get(index), total.get(index));
-				System.out.println();
+				for(int index = 0; index < namesOfItems.size(); index++){
+					System.out.printf("%15s%10s%10s%10s", namesOfItems.get(index), quantityOfItems.get(index), pricesOfEachItem.get(index), total.get(index));
+					System.out.println();
+				}
+				System.out.println("-------------------------------------------------------------------");
+				System.out.printf("                          Sub Total:  %10.2f%n", subTotal);
+				System.out.printf("                           Discount:  %10.2f%n", discount); 
+				System.out.printf("                        Vat @ 17.50:  %10.2f%n", vat);
+				System.out.println("===================================================================");
+				System.out.printf("                         Bill Total:  %10.2f%n", billTotal);
+				System.out.printf("                        Amount paid:  %10.2f%n", amountPaid);
+				System.out.printf("                            Balance:  %10.2f%n", leftOver);
+				System.out.println("===================================================================");
+				System.out.println("                    THANKS FOR YOUR PATRONAGE");
+				System.out.println("===================================================================");
+				break;
 			}
-			System.out.println("-------------------------------------------------------------------");
-			System.out.printf("                          Sub Total:  %10.2f%n", subTotal);
-			System.out.printf("                           Discount:  %10.2f%n", discount); 
-			System.out.printf("                        Vat @ 17.50:  %10.2f%n", vat);
-			System.out.println("===================================================================");
-			System.out.printf("                         Bill Total:  %10.2f%n", billTotal);
-			System.out.printf("                        Amount paid:  %10.2f%n", amountPaid);
-			System.out.printf("                            Balance:  %10.2f%n", leftOver);
-			System.out.println("===================================================================");
-			System.out.println("                    THANKS FOR YOUR PATRONAGE");
-			System.out.println("===================================================================");
-		}
-
-		else{
-			leftOver = amountPaid;
-
-			System.out.println("SEMICOLON STORES \nMAIN BRANCH \nLOCATION: 312, HERBERT MACAULAY WAY, SABO YABA, LAGOS. \nTEL: " + phoneNumber +"\nDate: " + formattedDateAndTime +"\nCashier: " + cashierName +"\nCustomer's name: " + customerName);
-
-			System.out.println("===================================================================");
-			System.out.println("          ITEM          QTY   PRICE   TOTAL(NGN)");
-			System.out.println("-------------------------------------------------------------------");
-
-			for(int index = 0; index < namesOfItems.size(); index++){
-				System.out.printf("%15s%10s%10s%10s", namesOfItems.get(index), quantityOfItems.get(index), pricesOfEachItem.get(index), total.get(index));
-				System.out.println();
+		
+			else if(amountPaid < 2){
+			
+				System.out.println("Please pay for the goods purchased.. thank you");
 			}
-			System.out.println("-------------------------------------------------------------------");
-			System.out.printf("                          Sub Total:  %10.2f%n", subTotal);
-			System.out.printf("                           Discount:  %10.2f%n", discount); 
-			System.out.printf("                        Vat @ 17.50:  %10.2f%n", vat);
-			System.out.println("===================================================================");
-			System.out.printf("                         Bill Total:  %10.2f%n", billTotal);
-			System.out.printf("                        Amount paid:  %10.2f%n", amountPaid);
-			System.out.println("===================================================================");
-			System.out.println("                    THANKS FOR YOUR PATRONAGE");
-			System.out.println("===================================================================");
 
+			else if(amountPaid < billTotal){
+				leftOver = billTotal - amountPaid;
 
+				System.out.println("SEMICOLON STORES \nMAIN BRANCH \nLOCATION: 312, HERBERT MACAULAY WAY, SABO YABA, LAGOS. \nTEL: " + phoneNumber +"\nDate: " + formattedDateAndTime +"\nCashier: " + cashierName +"\nCustomer's name: " + customerName);
+
+				System.out.println("===================================================================");
+				System.out.println("          ITEM          QTY   PRICE   TOTAL(NGN)");
+				System.out.println("-------------------------------------------------------------------");
+
+				for(int index = 0; index < namesOfItems.size(); index++){
+					System.out.printf("%15s%10s%10s%10s", namesOfItems.get(index), quantityOfItems.get(index), pricesOfEachItem.get(index), total.get(index));
+					System.out.println();
+				}
+				System.out.println("-------------------------------------------------------------------");
+				System.out.printf("                          Sub Total:  %10.2f%n", subTotal);
+				System.out.printf("                           Discount:  %10.2f%n", discount); 
+				System.out.printf("                        Vat @ 17.50:  %10.2f%n", vat);
+				System.out.println("===================================================================");
+				System.out.printf("                         Bill Total:  %10.2f%n", billTotal);
+				System.out.printf("                        Amount paid:  %10.2f%n", amountPaid);
+				System.out.println("===================================================================");
+				System.out.printf("                  Amount to Balance:  %10.2f%n", leftOver);
+				System.out.println("===================================================================");
+				System.out.println("                    THANKS FOR YOUR PATRONAGE");
+				System.out.println("===================================================================");
+				break;
+			}
+
+			else{
+				leftOver = amountPaid;
+
+				System.out.println("SEMICOLON STORES \nMAIN BRANCH \nLOCATION: 312, HERBERT MACAULAY WAY, SABO YABA, LAGOS. \nTEL: " + phoneNumber +"\nDate: " + formattedDateAndTime +"\nCashier: " + cashierName +"\nCustomer's name: " + customerName);
+
+				System.out.println("===================================================================");
+				System.out.println("          ITEM          QTY   PRICE   TOTAL(NGN)");
+				System.out.println("-------------------------------------------------------------------");
+
+				for(int index = 0; index < namesOfItems.size(); index++){
+					System.out.printf("%15s%10s%10s%10s", namesOfItems.get(index), quantityOfItems.get(index), pricesOfEachItem.get(index), total.get(index));
+					System.out.println();
+				}
+				System.out.println("-------------------------------------------------------------------");
+				System.out.printf("                          Sub Total:  %10.2f%n", subTotal);
+				System.out.printf("                           Discount:  %10.2f%n", discount); 
+				System.out.printf("                        Vat @ 17.50:  %10.2f%n", vat);
+				System.out.println("===================================================================");
+				System.out.printf("                         Bill Total:  %10.2f%n", billTotal);
+				System.out.printf("                        Amount paid:  %10.2f%n", amountPaid);
+				System.out.println("===================================================================");
+				System.out.println("                    THANKS FOR YOUR PATRONAGE");
+				System.out.println("===================================================================");
+				break;
+
+			}
 		}
 	}
 }

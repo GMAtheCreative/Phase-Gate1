@@ -22,9 +22,13 @@ public class GTBank{
 			(7) Close Account
 			""";
 
+
 		System.out.println("Welcome to Guarantee Trust Bank");
 
-		while(true){
+		System.out.println("Lets start transacting (YES/NO)");
+		String saticaction = collect.next();
+
+		while(!saticaction.equalsIgnoreCase("no")){
 			System.out.println("press \"1\" to perform a transaction");
 			int startTransaction = collect.nextInt();
 		
@@ -61,8 +65,6 @@ public class GTBank{
 							System.out.println("Confirm your four digit pin:");
 							customerpin2 = collect.next();
 						}
-					
-
 						firstName.add(customerFirstName);
 						lastName.add(customerLastName);
 						accountNumber.add(customerAccountNumber);
@@ -84,14 +86,13 @@ public class GTBank{
 						break;
 
 					case 2:
-						System.out.println("Enter your Account number:");
+						System.out.println("Enter your Account number to Deposit:");
 						String customerAccountNumberForDeposit = collect.next();
 						if(accountNumber.contains(customerAccountNumberForDeposit)){
-
-							System.out.println("How much do you want to deposit?");
-							double costomerDeposit = collect.nextDouble();
 					
 							for(int attempts = 1; attempts <= 3; attempts++){
+								System.out.println("How much do you want to deposit?");
+								double costomerDeposit = collect.nextDouble();
 								
 								System.out.println("Please enter your unique pin:");
 								String customerpin = collect.next();
@@ -121,7 +122,7 @@ public class GTBank{
 						break;
 
 					case 3:
-						System.out.println("Enter your Account number:");
+						System.out.println("Enter your Account number to withdraw:");
 						String customerAccountNumberForWithdrawal = collect.next();
 						if(accountNumber.contains(customerAccountNumberForWithdrawal)){
 
@@ -163,63 +164,69 @@ public class GTBank{
 							System.out.println("You need to have an account with us to to be able to withdraw");
 						}
 						break;
-
 					case 4:
-						System.out.println("Enter your Account number:");
+						System.out.println("Enter your Account number to Transfer:");
 						String customerAccountNumberForTransfer = collect.next();
 						if(accountNumber.contains(customerAccountNumberForTransfer)){
-							
 							for(int attempts = 1; attempts <= 3; attempts++){
 								System.out.println("Enter Recipient Account:");
-								String recipientAccount = collect.nextDouble();
-								if(accountNumber.contains(recipientAccount)){
-									System.out.println("How much do you want to transfer?");
-									double customerTransfer = collect.next();
-
-									for(int pinAttempts = 1; pinAttempts <= 3; pinAttempts++){
-										System.out.println("Please enter your unique pin:");
-										String customerpin = collect.next();
+								String recipientAccount = collect.next();
+								if(accountNumber.contains(recipientAccount) ){
+									if(!recipientAccount.equals(customerAccountNumberForTransfer)){
+										System.out.println("How much do you want to transfer?");
+										double customerTransfer = collect.nextDouble();
 									
-										int value = accountNumber.indexOf(customerAccountNumberForTransfer);
-										int count = accountNumber.indexOf(recipientAccount);
-										String correctPin = pin.get(value);
 
-										if(correctPin.equals(customerpin)){
-											if(costomerWithdrawal >= 100.00){
-												double currentCustomerBalance = balance.get(value);
-												double recipientBalance = balance.get(count);
-												if(currentCustomerBalance >= customerTransfer){
-													balance.set(value, currentCustomerBalance - customerTransfer);
-													balance.set(value, customerTransfer + recipientBalance);
-													System.out.println("Transfer Succesful>>>>>>>>>>>>>>>>----------");
-													break;
+										for(int pinAttempts = 1; pinAttempts <= 3; pinAttempts++){
+											System.out.println("Please enter your unique pin:");
+											String customerpin = collect.next();
+											int value = accountNumber.indexOf(customerAccountNumberForTransfer);
+											int count = accountNumber.indexOf(recipientAccount);
+											String correctPin = pin.get(value);
+											if(correctPin.equals(customerpin)){
+												if(customerTransfer >= 100.00){
+													double currentCustomerBalance = balance.get(value);
+													double recipientBalance = balance.get(count);
+													if(currentCustomerBalance >= customerTransfer){
+														balance.set(value, currentCustomerBalance - customerTransfer);
+														balance.set(value, customerTransfer + recipientBalance);
+														System.out.println("Transfer Succesful>>>>>>>>>>>>>>>>----------");
+														break;
+													}
+													else {
+														System.out.println("Insufficient funds.");
+													}
 												}
-												else {
-													System.out.println("Insufficient funds.");
+												else{
+													System.out.println("Amount too low for transfer");
+												}
 											}
 											else{
-												System.out.println("Amount too low for transfer");
+												System.out.println("Invalid pin");
 											}
-
+											break;
 										}
-									} 
+									}
+									else{
+										System.out.println("Dear user, you can't trasfer to yourself");
+									}
 								}
 								else{
 									System.out.println("This recipient is unrecognised.... please transfer to a valid account");
 								}
+								if(attempts == 3){
+									System.out.println("please transfer to a registred account");
+								}
 							}
+						}
 						else{
 							System.out.println("You need to have an account with us to to be able to make Transfers.");
 						}
 						break;
-
 					case 5:
-						System.out.println("Enter your Account number:");
+						System.out.println("Enter your Account number to check Balance:");
 						String customerAccountNumberCheckBalance = collect.next();
-						if(accountNumber.contains(customerAccountNumberCheck)){
-
-							System.out.println("Please enter your unique pin:");
-							String customerpin = collect.next();
+						if(accountNumber.contains(customerAccountNumberCheckBalance)){
 							for(int pinTrial = 1; pinTrial <= 3; pinTrial++){
 								System.out.println("Please enter your unique pin:");
 								String customerpin = collect.next();
@@ -235,22 +242,87 @@ public class GTBank{
 								else{
 									System.out.println("Invalid pin");
 								}
+								break;
 							}
 						}
 						else{
 							System.out.println("Account not found");
+						}
+						break;
 
+					case 6:
+						System.out.println("Enter your Account number to Change account pin:");
+						String customerAccountNumberChangePin = collect.next();
+						if(accountNumber.contains(customerAccountNumberChangePin)){
+							int value = accountNumber.indexOf(customerAccountNumberChangePin);
+
+							for(int pinTrialCounts = 1; pinTrialCounts <= 3; pinTrialCounts++){
+								System.out.println("Please enter your old pin:");
+								String customerpin = collect.next();
+								String correctPin = pin.get(value);
+								if(correctPin.equals(customerpin)){
+									System.out.println("Enter your new unique pin");
+									String newPin = collect.next();
+									pin.add(value,newPin);
+									System.out.println("pin changed Succesfully>>>>>>>>>>>>>>>>----------");
+									break;
+								}
+								else{
+									System.out.println("Invalid pin");	
+								}	
+							}
+						}
+						else{
+							System.out.println("Account not found");
+						}
+						break;
+
+					case 7:
+						System.out.println("Enter your Account number:");
+						String customerAccountNumberToChangePin = collect.next();
+						if(accountNumber.contains(customerAccountNumberToChangePin)){
+							int value = accountNumber.indexOf(customerAccountNumberToChangePin);
+							for(int pinTrialCounts = 1; pinTrialCounts <= 3; pinTrialCounts++){
+
+								System.out.println("Please enter your unique pin:");
+								String customerpin = collect.next();
+								String correctPin = pin.get(value);
+								if(correctPin.equals(customerpin)){
+									firstName.remove(value);
+									lastName.remove(value);
+									accountNumber.remove(value);
+									pin.remove(value);
+									balance.remove(value);
+									System.out.println("We are sad to see you go.... Thanks for being with us so far");
+									break;
+								}
+								else{
+									System.out.println("invalid pin");
+								}
+
+							}
+
+						}
+						else{
+							System.out.println("Account not found");
+						}
+						break;
+
+						
 					default:
 						System.out.println("invalid response");
 						break;
 				}
+
 			System.out.println();
 			System.out.println("Will you love to keep transacting \npress \"1\" to perform a transaction:");
 			startTransaction = collect.nextInt();
+
 			}
 
-			System.out.println("where satisfied with our service?");
-			String saticaction = collect.next();
+			System.out.println("where you satisfied with our services?");
+			saticaction = collect.next();
+
 		}
 	}
 }
