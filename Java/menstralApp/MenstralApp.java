@@ -8,7 +8,7 @@ public class MenstralApp{
 
 		//without using the java date function
 
-		System.out.println("Enter cycle lenght:");
+		/*System.out.println("Enter cycle lenght:");
 		int cycle = collect.nextInt();
 		System.out.println("Enter date you last saw your flow (day):");
 		int day = collect.nextInt();
@@ -35,7 +35,7 @@ public class MenstralApp{
 
 		System.out.println("Your next menstration is (DD/MM/YYYY) "+ newDay + "/"+ newMonth +"/"+ newYear);
 
-		System.out.println("======================================================================");
+		System.out.println("======================================================================");**/
 
 
 
